@@ -1,11 +1,19 @@
-cmake_minimum_required(VERSION 3.13)
-
-if (DEFINED ENV{RPPICOMIDI_PIO_HOST})
-set(RPPICOMIDI_PIO_HOST $ENV{RPPICOMIDI_PIO_HOST})
+# == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
+if(WIN32)
+    set(USERHOME $ENV{USERPROFILE})
+else()
+    set(USERHOME $ENV{HOME})
 endif()
-if (NOT DEFINED RPPICOMIDI_PIO_HOST OR (RPPICOMIDI_PIO_HOST EQUAL 0))
-set(BOARD pico_sdk)
+set(sdkVersion 2.0.0)
+set(toolchainVersion 13_2_Rel1)
+set(picotoolVersion 2.0.0)
+set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+if (EXISTS ${picoVscode})
+    include(${picoVscode})
 endif()
+# ====================================================================================
+set(PICO_BOARD pico CACHE STRING "Board type")
+cmake_minimum_required(VERSION 3.10)
 
 include(pico_sdk_import.cmake)
 set(target pico_usb_host_msc_demo)
